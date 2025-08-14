@@ -84,7 +84,7 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
     public void UpdatePartStatusControl(EntityUid entity, TargetingComponent component)
     {
         if (EntityManager.HasComponent<PainNumbnessComponent>(entity))
-            return _spriteSystem.Frame0();
+            PartStatusControl.SetTextures(_partStatusControls.Texture);
         else if (PartStatusControl != null && _targetingComponent != null)
             PartStatusControl.SetTextures(_targetingComponent.BodyStatus);
     }
