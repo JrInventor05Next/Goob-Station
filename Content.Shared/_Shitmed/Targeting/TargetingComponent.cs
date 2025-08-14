@@ -139,6 +139,22 @@ public sealed partial class TargetingComponent : Component
         { TargetBodyPart.RightFoot, WoundableSeverity.Healthy },
     };
 
+    [ViewVariables, AutoNetworkedField]
+    public Dictionary<TargetBodyPart, WoundSeverity> BodyBasic = new()
+    {
+        { TargetBodyPart.Head, WoundSeverity.Healed },
+        { TargetBodyPart.Chest, WoundSeverity.Healed },
+        { TargetBodyPart.Groin, WoundSeverity.Healed },
+        { TargetBodyPart.LeftArm, WoundSeverity.Healed },
+        { TargetBodyPart.LeftHand, WoundSeverity.Healed },
+        { TargetBodyPart.RightArm, WoundSeverity.Healed },
+        { TargetBodyPart.RightHand, WoundSeverity.Healed },
+        { TargetBodyPart.LeftLeg, WoundSeverity.Healed },
+        { TargetBodyPart.LeftFoot, WoundSeverity.Healed },
+        { TargetBodyPart.RightLeg, WoundSeverity.Healed },
+        { TargetBodyPart.RightFoot, WoundSeverity.Healed },
+    };
+
     /// <summary>
     /// What noise does the entity play when swapping targets?
     /// </summary>
