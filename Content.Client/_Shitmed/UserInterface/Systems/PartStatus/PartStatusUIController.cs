@@ -18,6 +18,7 @@ using Robust.Client.Player;
 using Robust.Shared.Utility;
 using Robust.Client.Graphics;
 using Robust.Shared.Timing;
+using Content.Shared.Mobs.Components;
 
 namespace Content.Client._Shitmed.UserInterface.Systems.PartStatus;
 
