@@ -78,9 +78,11 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
         _targetingComponent = null;
     }
 
-    public void UpdatePartStatusControl(EntityUid entity, TargetingComponent component)
+    public void UpdatePartStatusControl(EntityEffectBaseArgs args, TargetingComponent component)
     {
-        if (EntityManager.HasComponent<PainNumbnessComponent>(entity))
+        var entityManager = args.EntityManager;
+        var uid = args.TargetEntity;
+        if (entityManager.HasComponent<PainNumbnessComponent>(uid))
         {
             PartStatusControl.SetTextures(_targetingComponent.BodyBasic);
         }
