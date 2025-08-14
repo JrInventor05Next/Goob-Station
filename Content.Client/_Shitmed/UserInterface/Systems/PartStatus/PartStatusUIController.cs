@@ -18,9 +18,6 @@ using Robust.Client.Player;
 using Robust.Shared.Utility;
 using Robust.Client.Graphics;
 using Robust.Shared.Timing;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Traits.Assorted;
 
 namespace Content.Client._Shitmed.UserInterface.Systems.PartStatus;
@@ -84,7 +81,7 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
     public void UpdatePartStatusControl(EntityUid entity, TargetingComponent component)
     {
         if (EntityManager.HasComponent<PainNumbnessComponent>(entity))
-            return SpriteSpecifier.Rsi(new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{enumName.ToLowerInvariant()}.rsi"), $"{enumName.ToLowerInvariant()}_{enumValue}");
+            PartStatusControl.SetTextures(_targetingComponent.BodyBasic);
         else if (PartStatusControl != null && _targetingComponent != null)
             PartStatusControl.SetTextures(_targetingComponent.BodyStatus);
     }
