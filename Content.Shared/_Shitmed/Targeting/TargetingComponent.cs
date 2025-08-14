@@ -142,17 +142,17 @@ public sealed partial class TargetingComponent : Component
     [ViewVariables, AutoNetworkedField]
     public Dictionary<TargetBodyPart, WoundSeverity> BodyBasic = new()
     {
-        { TargetBodyPart.Head, WoundSeverity.Healed },
-        { TargetBodyPart.Chest, WoundSeverity.Healed },
-        { TargetBodyPart.Groin, WoundSeverity.Healed },
-        { TargetBodyPart.LeftArm, WoundSeverity.Healed },
-        { TargetBodyPart.LeftHand, WoundSeverity.Healed },
-        { TargetBodyPart.RightArm, WoundSeverity.Healed },
-        { TargetBodyPart.RightHand, WoundSeverity.Healed },
-        { TargetBodyPart.LeftLeg, WoundSeverity.Healed },
-        { TargetBodyPart.LeftFoot, WoundSeverity.Healed },
-        { TargetBodyPart.RightLeg, WoundSeverity.Healed },
-        { TargetBodyPart.RightFoot, WoundSeverity.Healed },
+        { TargetBodyPart.Head, WoundableSeverity.Healthy },
+        { TargetBodyPart.Chest, WoundableSeverity.Healthy },
+        { TargetBodyPart.Groin, WoundableSeverity.Healthy },
+        { TargetBodyPart.LeftArm, WoundableSeverity.Healthy },
+        { TargetBodyPart.LeftHand, WoundableSeverity.Healthy },
+        { TargetBodyPart.RightArm, WoundableSeverity.Healthy },
+        { TargetBodyPart.RightHand, WoundableSeverity.Healthy },
+        { TargetBodyPart.LeftLeg, WoundableSeverity.Healthy },
+        { TargetBodyPart.LeftFoot, WoundableSeverity.Healthy },
+        { TargetBodyPart.RightLeg, WoundableSeverity.Healthy },
+        { TargetBodyPart.RightFoot, WoundableSeverity.Healthy },
     };
 
     /// <summary>
