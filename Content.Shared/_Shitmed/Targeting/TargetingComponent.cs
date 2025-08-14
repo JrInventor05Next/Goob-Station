@@ -140,7 +140,7 @@ public sealed partial class TargetingComponent : Component
     };
 
     [ViewVariables, AutoNetworkedField]
-    public Dictionary<TargetBodyPart, WoundSeverity> BodyBasic = new()
+    public Dictionary<TargetBodyPart, WoundableSeverity> BodyBasic = new()
     {
         { TargetBodyPart.Head, WoundableSeverity.Healthy },
         { TargetBodyPart.Chest, WoundableSeverity.Healthy },
