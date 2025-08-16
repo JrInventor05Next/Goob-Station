@@ -79,7 +79,7 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
         _targetingComponent = null;
     }
 
-    public void UpdatePartStatusControl(EntityEffectBaseArgs args, TargetingComponent component)
+    public void UpdatePartStatusControl(TargetingComponent component)
     {
         var entityManager = args.EntityManager;
         var uid = args.TargetEntity;
