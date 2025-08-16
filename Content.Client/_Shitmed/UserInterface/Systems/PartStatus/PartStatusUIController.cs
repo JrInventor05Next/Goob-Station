@@ -83,14 +83,11 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
     {
         var entityManager = args.EntityManager;
         var uid = args.TargetEntity;
-        if (entityManager.HasComponent<PainNumbnessComponent>(uid))
-        {
-            PartStatusControl.SetTextures(_targetingComponent.BodyBasic);
-        }
-        else if (PartStatusControl != null && _targetingComponent != null)
-        {
+        if (_entManager.HasComponent<PainNumbnessComponent>(component.Owner))
+            return;
+        
+        if (PartStatusControl != null && _targetingComponent != null)
             PartStatusControl.SetTextures(_targetingComponent.BodyStatus);
-        }
     }
 
     public Texture GetTexture(SpriteSpecifier specifier)
