@@ -19,7 +19,6 @@ using Robust.Shared.Utility;
 using Robust.Client.Graphics;
 using Robust.Shared.Timing;
 using Content.Shared.Traits.Assorted;
-using Content.Shared.EntityEffects;
 
 namespace Content.Client._Shitmed.UserInterface.Systems.PartStatus;
 
