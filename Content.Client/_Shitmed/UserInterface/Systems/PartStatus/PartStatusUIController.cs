@@ -80,8 +80,6 @@ public sealed class PartStatusUIController : UIController, IOnStateEntered<Gamep
 
     public void UpdatePartStatusControl(TargetingComponent component)
     {
-        var entityManager = args.EntityManager;
-        var uid = args.TargetEntity;
         if (_entManager.HasComponent<PainNumbnessComponent>(component.Owner))
             return;
         
