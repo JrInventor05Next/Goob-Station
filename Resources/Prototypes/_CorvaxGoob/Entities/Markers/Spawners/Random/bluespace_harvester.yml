@@ -384,6 +384,7 @@
     - BorgChassisJanitor
     - BorgChassisService
     - BorgChassisMedical
+    - BorgChassisSecurity
     chance: 1.0
     offset: 0.0
 

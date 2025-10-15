@@ -1,0 +1,51 @@
+- type: entity
+  id: BorgChassisSecurity
+  parent: BorgChassisSelectable
+  name: security cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: security
+  - type: BorgSwitchableSubtype # Goobstation
+    borgSubtype: security_default
+  - type: FlashImmunity
+  - type: BorgTransponder
+    sprite:
+      sprite: _CorvaxGoob/Mobs/Silicon/chassis.rsi
+      state: security
+    name: cyborg
+  - type: Sprite
+    sprite: _CorvaxGoob/Mobs/Silicon/chassis.rsi
+    layers:
+    - state: security
+      map: ["enum.BorgVisualLayers.Body", "movement"]
+    - state: security_e_r
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: security_l
+      shader: unshaded
+      map: ["light","enum.BorgVisualLayers.LightStatus"]
+      visible: false
+  - type: BorgChassis
+    # Default borg can take no modules until selected type.
+    maxModules: 0
+    hasMindState: security_e
+    noMindState: security_e_r
+    moduleWhitelist:
+      tags:
+      - BorgModuleGeneric
+      - BorgModuleSecurity
+  # - type: ItemCreator
+  #   action: ActionHandCuffsSpawn
+  #   charge: 2.5
+  #   spawnedPrototype: Handcuffs
+  #   noPowerPopup: item-switch-failed-no-power
+
+# - type: entity
+#   id: BorgChassisSecurityBasic
+#   parent: BorgChassisSecurity
+#   name: basic security cyborg
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: BorgSwitchableSubtype
+#     borgSubtype: security_basic

@@ -1,4 +1,7 @@
 - type: Tag
+  id: BorgModuleSecurity
+
+- type: Tag
   id: CarcTile # Spacessonne
 
 - type: Tag
