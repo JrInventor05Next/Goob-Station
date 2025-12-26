@@ -49,6 +49,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared._Shitmed.Surgery;
+using Robust.Shared.Serialization;
+using Content.Shared._CorvaxGoob.Skills;
 
 namespace Content.Shared._Shitmed.Medical.Surgery;
 
@@ -885,7 +887,19 @@ public abstract partial class SharedSurgerySystem
         var duration = GetSurgeryDuration(step, user, body, speed);
 
         if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod))
-            duration = duration / surgerySpeedMod.SpeedModifier;
+        {
+            var surgerySkill = new HasSkillEvent(GetNetEntity(user), Skills.Surgery);
+            RaiseLocalEvent(surgerySkill);
+            if (!surgerySkill.HasSkill)
+            {
+                duration = duration / 0.5f / surgerySpeedMod.SpeedModifier;
+                duration *= 0.5f;
+            }
+            else
+            {
+                duration /= surgerySpeedMod.SpeedModifier;
+            }
+        }
 
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(duration), ev, body, part)
         {
@@ -925,11 +939,16 @@ public abstract partial class SharedSurgerySystem
             return 2f; // Shouldnt really happen but just a failsafe.
 
         var speed = toolSpeed;
+        var surgerySkill = new HasSkillEvent(GetNetEntity(user), Skills.Surgery);
+        RaiseLocalEvent(surgerySkill);
+
         if(TryComp<BuckleComponent>(target, out var buckleComp)) // Get buckle component from target.
             if(TryComp<OperatingTableComponent>(buckleComp.BuckledTo, out var operatingTableComponent))  // If they are buckled to entity with operating table component
                 speed *= operatingTableComponent.SpeedModifier; // apply surgery speed modifier
         if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod))
             speed *= surgerySpeedMod.SpeedModifier;
+        if (!surgerySkill.HasSkill)
+            speed *= 0.5f;
 
         return stepComp.Duration / speed;
     }
@@ -1082,4 +1101,18 @@ public abstract partial class SharedSurgerySystem
 
     private bool HasSurgeryComp(EntityUid tool, IComponent component) => GetSurgeryComp(tool, component) != null;
     #endregion
+
+    [Serializable, NetSerializable]
+    public sealed class HasSkillEvent : EntityEventArgs
+    {
+        public NetEntity User { get; init; }
+        public Skills Skill { get; init; }
+        public bool HasSkill { get; set; }
+
+        public HasSkillEvent(NetEntity user, Skills skill)
+        {
+            User = user;
+            Skill = skill;
+        }
+    }
 }

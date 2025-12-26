@@ -30,6 +30,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Melee.Events;
 using System.Linq;
+using Content.Shared._CorvaxGoob.Skills;
+using Content.Server._CorvaxGoob.Skills;
 
 namespace Content.Server._Shitmed.Medical.Surgery;
 
@@ -42,6 +44,7 @@ public sealed class SurgerySystem : SharedSurgerySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly WoundSystem _wounds = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private readonly Dictionary<NetEntity, List<EntProtoId>> _surgeries = new();
 
@@ -55,6 +58,7 @@ public sealed class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryDamageChangeEffectComponent, SurgeryStepDamageChangeEvent>(OnSurgeryDamageChange);
         SubscribeLocalEvent<SurgeryStepEmoteEffectComponent, SurgeryStepEvent>(OnStepScreamComplete);
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
+        SubscribeLocalEvent<HasSkillEvent>(CheckHasSkill);
     }
 
     protected override void RefreshUI(EntityUid body)
@@ -133,4 +137,9 @@ public sealed class SurgerySystem : SharedSurgerySystem
     }
     private void OnStepSpawnComplete(Entity<SurgeryStepSpawnEffectComponent> ent, ref SurgeryStepEvent args) =>
         SpawnAtPosition(ent.Comp.Entity, Transform(args.Body).Coordinates);
+
+    private void CheckHasSkill(HasSkillEvent args)
+    {
+        args.HasSkill = _skills.HasSkill(GetEntity(args.User), args.Skill);
+    }
 }
